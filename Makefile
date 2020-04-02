@@ -62,6 +62,8 @@ ifeq ($(HOST_OS),Win)
 	@$(call cmake_build,./_build,..,-DCMAKE_INSTALL_PREFIX=$(MKFILE_DIR)/_install)
 else
 	@$(call cmake_build,./_build,..)
+	@cd ./_build;$(SUDO) cpack .
+	#@cd ./_build;$(SUDO) chown $(USER) install_manifest.txt;cpack .; #non-root
 endif
 
 .PHONY: build
